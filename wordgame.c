@@ -1,3 +1,12 @@
+/* 
+Team member 1 "Grant Nagel" | "Like a lot tbh"
+Team member 2 "Preston Gaskill" | "Percentage of Contribution to The Project"
+Team member 3 "Joseph Hennings" | "Percentage of Contribution to The Project"
+Team member 4 "Jack Morr" | "Percentage of Contribution to The Project"
+Team member 5 "John Carber" | "Percentage of Contribution to The Project"
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
