@@ -64,6 +64,8 @@ int main(void){
 
 
     while (gamestate){
+        mainCursor.y = BOXHEIGHT + 1;
+        mainCursor.x = 3;
         for (int u = 0; u < nPrinted; u += 1){
             for (int o = 0; o < strlen(spawnedWords[u].word); o += 1){
                 mvaddch(spawnedWords[u].y - 1, spawnedWords[u].x + o, ' ');
@@ -72,7 +74,7 @@ int main(void){
         }
         if ((input = getch()) != ERR){
             clearTypingArea();
-            if (input == 127 || input == 8){
+            if ((input == 127 || input == 8) && userWordAddIndex != 0){
                 userWord[userWordAddIndex - 1] = '\0';
                 userWordAddIndex -= 1;
             } else {
@@ -90,11 +92,6 @@ int main(void){
                         mvaddch(spawnedWords[0].y, spawnedWords[0].x + v, ' ');
                     }
                     nPrinted -= 1;
-                    clearTypingArea();
-                    userWord[0] = '\0';
-                    mainCursor.y = BOXHEIGHT + 1;
-                    mainCursor.x = 3;
-                    move(mainCursor.y, mainCursor.x);
                 }
             }
             }
@@ -109,7 +106,6 @@ int main(void){
             }
             cycle = 0;
         }
-        //move(mainCursor.y, mainCursor.x);
         for (int b = 0; b < strlen(userWord); b += 1){
                 mvaddstr(mainCursor.y, mainCursor.x, userWord);
         }
