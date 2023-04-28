@@ -112,6 +112,8 @@ int main(void){
                         spawnedWords[m].x = spawnedWords[m + 1].x;
                     }
                     nPrinted -= 1;
+                    strcpy(userWord, " ");
+                    userWordAddIndex = 0;
                 }
             }
             }
