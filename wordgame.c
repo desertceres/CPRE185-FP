@@ -204,5 +204,5 @@ void clearTypingArea(){
     }
 }
 
-//gcc waihdwaio -o hasdh -lncurses
-// ./hasdh 
+//gcc ./wordgame.c -o test -lncurses
+// ./test
