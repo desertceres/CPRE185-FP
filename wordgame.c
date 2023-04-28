@@ -9,6 +9,15 @@ Team member 5 "John Carber" | "Percentage of Contribution to The Project"
 */
 
 ////////////////////
+
+
+
+
+//Needs to be added: Beginning message, adding words to wordlist, quit button, word spawn chance increases as time goes on, track user time
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
