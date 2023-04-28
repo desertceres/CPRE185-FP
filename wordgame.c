@@ -81,7 +81,13 @@ int main(void){
             userWordAddIndex += 1;
             if (nPrinted > 0 && !(spawnedWords[0].word == NULL)){
                 if (strcmp(userWord, spawnedWords[0].word) == 0){
-                    mvaddstr(5, BOXWIDTH + 10, "match");
+                    for (int m = 0; m < nPrinted - 1; m += 1){
+                        strcpy(spawnedWords[m].word, spawnedWords[m + 1].word);
+                        spawnedWords[m].y = spawnedWords[m + 1].y;
+                        spawnedWords[m].x = spawnedWords[m + 1].x;
+                    }
+                    for (int v = 0; v < strlen())
+                    nPrinted -= 1;
                 }
             }
             }
