@@ -86,8 +86,14 @@ int main(void){
                         spawnedWords[m].y = spawnedWords[m + 1].y;
                         spawnedWords[m].x = spawnedWords[m + 1].x;
                     }
-                    for (int v = 0; v < strlen())
+                    for (int v = 0; v < strlen(spawnedWords[0].word); v += 1){
+                        mvaddch(spawnedWords[0].y, spawnedWords[0].x + v, ' ');
+                    }
                     nPrinted -= 1;
+                    clearTypingArea();
+                    userWord[0] = '\0';
+                    mainCursor.y = BOXHEIGHT + 1;
+                    mainCursor.x = 3;
                 }
             }
             }
