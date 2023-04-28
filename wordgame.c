@@ -94,6 +94,7 @@ int main(void){
                     userWord[0] = '\0';
                     mainCursor.y = BOXHEIGHT + 1;
                     mainCursor.x = 3;
+                    move(mainCursor.y, mainCursor.x);
                 }
             }
             }
