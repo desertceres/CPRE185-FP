@@ -56,7 +56,7 @@ int main(void){
     int temp = 0;
     bool gamestate = true;
     int cycle = 0;
-    char userWord[50] = "temp";
+    char userWord[50] = " ";
     int userWordAddIndex = 0;
     char input;
     cursor mainCursor = {BOXHEIGHT + 1, 3};
@@ -83,13 +83,13 @@ int main(void){
             userWordAddIndex += 1;
             if (nPrinted > 0 && !(spawnedWords[0].word == NULL)){
                 if (strcmp(userWord, spawnedWords[0].word) == 0){
+                    for (int v = 0; v < strlen(spawnedWords[0].word); v += 1){
+                        mvaddch(spawnedWords[0].y, spawnedWords[0].x + v, ' ');
+                    }
                     for (int m = 0; m < nPrinted - 1; m += 1){
                         strcpy(spawnedWords[m].word, spawnedWords[m + 1].word);
                         spawnedWords[m].y = spawnedWords[m + 1].y;
                         spawnedWords[m].x = spawnedWords[m + 1].x;
-                    }
-                    for (int v = 0; v < strlen(spawnedWords[0].word); v += 1){
-                        mvaddch(spawnedWords[0].y, spawnedWords[0].x + v, ' ');
                     }
                     nPrinted -= 1;
                 }
@@ -107,7 +107,7 @@ int main(void){
             cycle = 0;
         }
         for (int b = 0; b < strlen(userWord); b += 1){
-                mvaddstr(mainCursor.y, mainCursor.x, userWord);
+                mvaddstr(BOXHEIGHT + 1, 2, userWord);
         }
         refresh();
         cycle += 1;
