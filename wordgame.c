@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ncurses/ncurses.h>
+#include <ncursesw/ncurses.h>
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
@@ -24,15 +24,28 @@ typedef struct word_struct {
     char* word;
 } word;
 
+typedef struct cursor_struct {
+    int y;
+    int x;
+} cursor;
+
 void printbox();
 int number_of_words();
 void scan_file(int n, char** wordlistf);
 void spawnWord(int n, word* spawnedWord, char** wordlistf);
+void clearTypingArea();
 
 int main(void){
     srand(time(NULL));
-    initscr();
+    WINDOW *w = initscr();
+    cbreak();
+    noecho();
+    nodelay(w, TRUE);
+
+
     printbox();
+
+
     int numberOfWords = number_of_words();
     char** wordlist = (char**)malloc(numberOfWords * sizeof(char*));
     scan_file(numberOfWords, wordlist);
@@ -43,12 +56,35 @@ int main(void){
     int temp = 0;
     bool gamestate = true;
     int cycle = 0;
+    char userWord[50] = "temp";
+    int userWordAddIndex = 0;
+    char input;
+    cursor mainCursor = {BOXHEIGHT + 1, 3};
+    int activeWord = 0;
+
+
     while (gamestate){
         for (int u = 0; u < nPrinted; u += 1){
             for (int o = 0; o < strlen(spawnedWords[u].word); o += 1){
                 mvaddch(spawnedWords[u].y - 1, spawnedWords[u].x + o, ' ');
             }
             mvaddstr(spawnedWords[u].y, spawnedWords[u].x, spawnedWords[u].word);
+        }
+        if ((input = getch()) != ERR){
+            clearTypingArea();
+            if (input == 127 || input == 8){
+                userWord[userWordAddIndex - 1] = '\0';
+                userWordAddIndex -= 1;
+            } else {
+            userWord[userWordAddIndex] = input;
+            userWord[userWordAddIndex + 1] = '\0';
+            userWordAddIndex += 1;
+            if (nPrinted > 0 && !(spawnedWords[0].word == NULL)){
+                if (strcmp(userWord, spawnedWords[0].word) == 0){
+                    mvaddstr(5, BOXWIDTH + 10, "match");
+                }
+            }
+            }
         }
         if (cycle >= 120){
             if ((rand() % 2) == 1){
@@ -60,11 +96,18 @@ int main(void){
             }
             cycle = 0;
         }
-        move(BOXHEIGHT + 1,5);
+        //move(mainCursor.y, mainCursor.x);
+        for (int b = 0; b < strlen(userWord); b += 1){
+                mvaddstr(mainCursor.y, mainCursor.x, userWord);
+        }
         refresh();
         cycle += 1;
         nanosleep(&loop, NULL);
     }
+
+
+
+
     nanosleep(&pause, NULL);
     for (int h = 0; h < numberOfWords; h += 1){
         free(wordlist[h]);
@@ -114,6 +157,12 @@ void scan_file(int n, char** wordlistf){
 void spawnWord(int n, word* spawnedWord, char** wordlistf){
     int chosenWord = rand() % n;
     spawnedWord->word = wordlistf[chosenWord];
-    spawnedWord->x = ((rand() % BOXWIDTH - 3) + 3) - strlen(wordlistf[chosenWord]);
+    spawnedWord->x = ((rand() % (BOXWIDTH - 3)) + 3) - strlen(wordlistf[chosenWord]);
     spawnedWord->y = 3;
+}
+
+void clearTypingArea(){
+    for (int g = 2; g < BOXWIDTH - 2; g += 1){
+        mvaddch(BOXHEIGHT + 1, g, ' ');
+    }
 }
