@@ -4,7 +4,7 @@
 Team member 1 "Grant Nagel" | 20%
 Team member 2 "Preston Gaskill" | 20%
 Team member 3 "Joseph Hennings" | 20%
-Team member 4 "Jack Morr" | 20%
+Team member 4 "Jack Morrison" | 20%
 Team member 5 "John Carber" | 20%
 */
 ////////////////////
