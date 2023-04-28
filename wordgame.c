@@ -186,3 +186,6 @@ void clearTypingArea(){
         mvaddch(BOXHEIGHT + 1, g, ' ');
     }
 }
+
+//gcc waihdwaio -o hasdh -lncurses
+// ./hasdh 
