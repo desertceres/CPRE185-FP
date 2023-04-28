@@ -7,7 +7,7 @@
 #include <string.h>
 
 #define BOXHEIGHT 25
-#define BOXWIDTH 80
+#define BOXWIDTH 120
 #define STARTY 0
 #define STARTX 0
 
@@ -74,7 +74,7 @@ int main(void){
         }
         if ((input = getch()) != ERR){
             clearTypingArea();
-            if ((input == 127 || input == 8) && userWordAddIndex != 0){
+            if ((input == 127 || input == 8) && strlen(userWord) > 0){
                 userWord[userWordAddIndex - 1] = '\0';
                 userWordAddIndex -= 1;
             } else {
@@ -166,7 +166,7 @@ void scan_file(int n, char** wordlistf){
 void spawnWord(int n, word* spawnedWord, char** wordlistf){
     int chosenWord = rand() % n;
     spawnedWord->word = wordlistf[chosenWord];
-    spawnedWord->x = ((rand() % (BOXWIDTH - 3)) + 3) - strlen(wordlistf[chosenWord]);
+    spawnedWord->x = (rand() % (BOXWIDTH - strlen(wordlistf[chosenWord])) + 3);
     spawnedWord->y = 3;
 }
 
