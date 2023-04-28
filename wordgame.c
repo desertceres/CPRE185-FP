@@ -1,7 +1,7 @@
 //SE 185: Final Project Template//
 /////////////////////////
 /* 
-Team member 1 "Grant Nigel" | "Like a lot tbh"
+Team member 1 "Grant Nagel" | "Like a lot tbh"
 Team member 2 "Preston Gaskill" | "Percentage of Contribution to The Project"
 Team member 3 "Joseph Hennings" | "Percentage of Contribution to The Project"
 Team member 4 "Jack Morr" | "Percentage of Contribution to The Project"
