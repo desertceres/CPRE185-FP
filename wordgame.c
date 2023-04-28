@@ -7,16 +7,9 @@ Team member 3 "Joseph Hennings" | "Percentage of Contribution to The Project"
 Team member 4 "Jack Morr" | "Percentage of Contribution to The Project"
 Team member 5 "John Carber" | "Percentage of Contribution to The Project"
 */
-
 ////////////////////
 
-
-
-
 //Needs to be added: Beginning message, adding words to wordlist, quit button, word spawn chance increases as time goes on, track user time
-
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
