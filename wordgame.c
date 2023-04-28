@@ -1,12 +1,14 @@
+//SE 185: Final Project Template//
+/////////////////////////
 /* 
-Team member 1 "Grant Nagel" | "Like a lot tbh"
+Team member 1 "Grant Nigel" | "Like a lot tbh"
 Team member 2 "Preston Gaskill" | "Percentage of Contribution to The Project"
 Team member 3 "Joseph Hennings" | "Percentage of Contribution to The Project"
 Team member 4 "Jack Morr" | "Percentage of Contribution to The Project"
 Team member 5 "John Carber" | "Percentage of Contribution to The Project"
 */
 
-
+////////////////////
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
@@ -24,6 +26,9 @@ Team member 5 "John Carber" | "Percentage of Contribution to The Project"
 //mvvline()
 //mvaddch(y, x, ACS_UL/LL/UR/LRCORNER);
 
+//////////////////////
+//Struct Definition//
+////////////////////
 struct timespec loop = {0, 8333333};
 struct timespec pause = {5, 0};
 
@@ -38,11 +43,17 @@ typedef struct cursor_struct {
     int x;
 } cursor;
 
+/////////////////////////////////////
+//User Defined Functions Prototype//
+//List prototypes here and define//
+//tehm below the main function////
+/////////////////////////////////
 void printbox();
 int number_of_words();
 void scan_file(int n, char** wordlistf);
 void spawnWord(int n, word* spawnedWord, char** wordlistf);
 void clearTypingArea();
+
 
 int main(void){
     srand(time(NULL));
@@ -101,8 +112,6 @@ int main(void){
                         spawnedWords[m].x = spawnedWords[m + 1].x;
                     }
                     nPrinted -= 1;
-                    strcpy(userWord, " ");
-                    userWordAddIndex = 0;
                 }
             }
             }
@@ -137,6 +146,9 @@ int main(void){
     return 0;
 }
 
+///////////////////////////////////////
+//User Defined Functions' Definition//
+/////////////////////////////////////
 void printbox(){
     mvhline(STARTY, STARTX, 0, BOXWIDTH);
     mvhline(STARTY + BOXHEIGHT, STARTX, 0, BOXWIDTH);
