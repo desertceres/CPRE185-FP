@@ -31,7 +31,7 @@ Team member 5 "John Carber" | 20%
 #define SCOREBOARDWIDTH 3
 #define TIMEHEIGHT 2
 #define TIMEWIDTH 4
-#define CHANCETIMESEG 10
+#define CHANCETIMESEG 20
 
 //mvhline()
 //mvvline()
@@ -65,9 +65,33 @@ void clearTypingArea();
 void endMessage(int sTime);
 void drawScoreboard(int userScore);
 void drawTime(int sTime);
+void addWords(char addWord[100]);
 
 
 int main(void){
+    char begin;
+	printf("Welcome to the word game.\nEnter 'c' to begin.\nOr enter 'a' to add words --> ");
+	scanf("%c", &begin);
+	
+	if (begin == 'c' || begin == 'C') {
+	} else if (begin == 'a' || begin == 'A') {
+		char YorN = 'y';
+		do {
+			char temp[100];
+			printf("Enter word to add --> ");
+			scanf("%s", temp);
+			addWords(temp);
+			printf("Want to add another? ('y' or 'n') --> ");
+			scanf(" %c", &YorN);
+		} while (YorN == 'y');
+		
+	} else { return 0; }
+
+    //Scan file into wordlist
+    int numberOfWords = number_of_words();
+    char** wordlist = (char**)malloc(numberOfWords * sizeof(char*));
+    scan_file(numberOfWords, wordlist);
+
     srand(time(NULL));      //Window initialization and rand seed
     WINDOW *w = initscr();
     cbreak();
@@ -75,11 +99,6 @@ int main(void){
     nodelay(w, TRUE);
 
     drawBox();
-
-    //Scan file into wordlist
-    int numberOfWords = number_of_words();
-    char** wordlist = (char**)malloc(numberOfWords * sizeof(char*));
-    scan_file(numberOfWords, wordlist);
 
     //Setup loop variables
     int startTime = time(NULL); //Start time
@@ -271,6 +290,13 @@ void drawTime(int sTime){ //Draws box for time display and press tab to quit mes
     mvaddch(timey + TIMEHEIGHT, timex + TIMEWIDTH, ACS_LRCORNER);
     mvaddstr(timey + 5, timex, "Press tab to quit.");
 }
+
+void addWords(char addWord[100]) {
+	FILE* file = fopen("wordlist.txt", "a");
+	fprintf(file, "\n%s", addWord);
+	fclose(file);
+}
+
 
 //gcc ./wordgame.c -o test -lncurses
 // ./test
