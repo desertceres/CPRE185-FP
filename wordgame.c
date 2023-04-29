@@ -10,9 +10,6 @@ Team member 5 "John Carber" | 20%
 ////////////////////
 
 
-
-//Needs to be added: Beginning message, adding words to wordlist
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h> //Arch doesn't have ncurses-dev package folder
