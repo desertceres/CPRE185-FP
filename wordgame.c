@@ -1,16 +1,11 @@
-//SE 185: Final Project Template//
-/////////////////////////
 /* 
-Team member 1 "Grant Nagel" | 20%
-Team member 2 "Preston Gaskill" | 20%
-Team member 3 "Joseph Hennings" | 20%
-Team member 4 "Jack Morrison" | 20%
-Team member 5 "John Carber" | 20%
+Team member 1 "Grant Nagel" | "Like a lot tbh"
+Team member 2 "Preston Gaskill" | "Percentage of Contribution to The Project"
+Team member 3 "Joseph Hennings" | "Percentage of Contribution to The Project"
+Team member 4 "Jack Morr" | "Percentage of Contribution to The Project"
+Team member 5 "John Carber" | "Percentage of Contribution to The Project"
 */
-////////////////////
 
-//Needs to be added: Beginning message, adding words to wordlist, quit button, word spawn chance increases as time goes on, track user time
-//lose condition,
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,9 +24,6 @@ Team member 5 "John Carber" | 20%
 //mvvline()
 //mvaddch(y, x, ACS_UL/LL/UR/LRCORNER);
 
-//////////////////////
-//Struct Definition//
-////////////////////
 struct timespec loop = {0, 8333333};
 struct timespec pause = {5, 0};
 
@@ -46,28 +38,14 @@ typedef struct cursor_struct {
     int x;
 } cursor;
 
-/////////////////////////////////////
-//User Defined Functions Prototype//
-//List prototypes here and define//
-//tehm below the main function////
-/////////////////////////////////
 void printbox();
 int number_of_words();
 void scan_file(int n, char** wordlistf);
 void spawnWord(int n, word* spawnedWord, char** wordlistf);
 void clearTypingArea();
-
+void addWords(char**wordlist, char addWord[100]);
 
 int main(void){
-    srand(time(NULL));
-    WINDOW *w = initscr();
-    cbreak();
-    noecho();
-    nodelay(w, TRUE);
-
-
-    printbox();
-
 
     int numberOfWords = number_of_words();
     char** wordlist = (char**)malloc(numberOfWords * sizeof(char*));
@@ -84,7 +62,32 @@ int main(void){
     char input;
     cursor mainCursor = {BOXHEIGHT + 1, 3};
     int activeWord = 0;
-
+	char begin;
+	
+	printf("Welcome to the word game.\nEnter 'c' to begin.\nOr enter 'a' to add words --> ");
+	scanf("%c", &begin);
+	
+	if (begin == 'c' || begin == 'C') {
+	} else if (begin == 'a' || begin == 'A') {
+		char YorN = 'y';
+		
+		do {
+			char temp[100];
+			printf("Enter word to add --> ");
+			scanf("%s", temp);
+			addWords(wordlist, temp);
+			printf("Want to add another? ('y' or 'n') --> ");
+			scanf(" %c", &YorN);
+		} while (YorN == 'y');
+		
+	} else { return 0; }
+	
+    srand(time(NULL));
+    WINDOW *w = initscr();
+    cbreak();
+    noecho();
+    nodelay(w, TRUE);
+    printbox();
 
     while (gamestate){
         mainCursor.y = BOXHEIGHT + 1;
@@ -151,9 +154,6 @@ int main(void){
     return 0;
 }
 
-///////////////////////////////////////
-//User Defined Functions' Definition//
-/////////////////////////////////////
 void printbox(){
     mvhline(STARTY, STARTX, 0, BOXWIDTH);
     mvhline(STARTY + BOXHEIGHT, STARTX, 0, BOXWIDTH);
@@ -184,7 +184,7 @@ int number_of_words(){
 void scan_file(int n, char** wordlistf){
     FILE* fp2 = fopen("wordlist.txt", "r");
     for (int i = 0; i < n; i += 1){
-        char* temp = malloc(20 * sizeof(char));
+        char* temp = (char*)malloc(20 * sizeof(char));
         fscanf(fp2, " %s", temp);
         wordlistf[i] = temp;
     }
@@ -204,5 +204,11 @@ void clearTypingArea(){
     }
 }
 
-//gcc ./wordgame.c -o test -lncurses
-// ./test
+void addWords(char** wordlist, char addWord[100]) {
+	FILE* file = fopen("wordlist.txt", "a");
+	fprintf(file, "\n%s", addWord);
+	fclose(file);
+}
+
+//gcc waihdwaio -o hasdh -lncurses
+// ./hasdh 
