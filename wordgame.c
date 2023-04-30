@@ -224,8 +224,8 @@ void scan_file(int n, char** wordlistf){ //Scans words into wordlist
 void spawnWord(int n, word* spawnedWord, char** wordlistf){ //Chooses random word, and random x location to spawn word
     int chosenWord = rand() % n;
     spawnedWord->word = wordlistf[chosenWord];
-    spawnedWord->x = (rand() % (BOXWIDTH - strlen(wordlistf[chosenWord]) - 1)) + 1; //Shortens spawn area by 1 more than length of 
-    spawnedWord->y = 3;                                                             //chosen word, then shifts left by 1 to avoid left wall
+    spawnedWord->x = (rand() % ((BOXWIDTH - 3) - strlen(wordlistf[chosenWord]))) + 2; //Shortens spawn area by 1 more than length of 
+    spawnedWord->y = 2;                                                             //chosen word, then shifts left by 1 to avoid left wall
 }
 
 void clearTypingArea(){ //Clears user's typing area
