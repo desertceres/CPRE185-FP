@@ -237,7 +237,7 @@ void clearTypingArea(){ //Clears user's typing area
 void endMessage(int sTime){ //Handles game end
     clear();
     drawBox();
-    mvprintw(BOXHEIGHT / 2, (BOXWIDTH / 2) - 11, "You made it %d seconds!", time(NULL) - sTime);
+    mvprintw(BOXHEIGHT / 2, (BOXWIDTH / 2) - 11, "You made it %ld seconds!", time(NULL) - sTime);
     refresh();
     nanosleep(&pause, NULL); //Pauses so game does not end instantaneously
 }
@@ -276,7 +276,7 @@ void drawTime(int sTime){ //Draws box for time display and press tab to quit mes
     int timey = 7;
     int timex = BOXWIDTH + 3;
     mvaddstr(6, timex, "TIME");
-    mvprintw(timey + 1, timex + 1, "%03d", time(NULL) - sTime);
+    mvprintw(timey + 1, timex + 1, "%03ld", time(NULL) - sTime);
     mvhline(timey, timex, 0, TIMEWIDTH);
     mvhline(timey + TIMEHEIGHT, timex, 0, TIMEWIDTH);
     mvvline(timey, timex, 0, TIMEHEIGHT);
